@@ -1,7 +1,7 @@
 # Learning collective multi-cellular dynamics from temporal scRNA-seq via a transformer-enhanced Neural SDE
 
 **Authour**: Qi Jiang, Lei Zhang, Longquan Li and Lin Wan
-![Overview](./assets/overview.jpg)
+![Overview](./assets/Overview.jpg)
 
 Time-series single-cell RNA-sequencing (scRNA-seq) datasets offer unprecedented insights into the dynamics and heterogeneity of cellular systems. These systems exhibit multiscale collective behaviors driven by intricate intracellular gene regulatory networks and intercellular interactions of molecules. However, inferring interacting cell population dynamics from time-series scRNA-seq data remains a significant challenge, as cells are isolated and destroyed during sequencing. To address this, we introduce scIMF, a single-cell deep generative Interacting Mean Field model, designed to learn collective multi-cellular dynamics. Our approach leverages a transformer-enhanced stochastic differential equation network to simultaneously capture cell-intrinsic dynamics and intercellular interactions. Through extensive benchmarking on multiple scRNA-seq datasets, scIMF outperforms existing methods in reconstructing gene expression at held-out time points, demonstrating that modeling cell-cell communication enhances the accuracy of multicellular dynamics characterization. Additionally, our model provides biologically interpretable insights into cell-cell interactions during dynamic processes, offering a powerful tool for understanding complex cellular systems.
 
@@ -15,7 +15,7 @@ For the dataset of zebrafish embryogenesis (ZB data), we downloaded the data fro
 For the dataset of reprogramming of mouse embryonic fibroblasts to induced pluripotent stem cells (MEF data), we downloaded the data from [https://broadinstitute.github.io/wot/tutorial/](https://broadinstitute.github.io/wot/tutorial/).
 For the dataset of pancreatic β-cell differentiation (Panc data), we downloaded the data in the NCBI under accession number [GSE114412](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE114412).
 
-Detailed pre-processing steps for these data can be found in the catalogues ./data/Veres and ./data/Weinreb
+Detailed pre-processing steps for these datasets can be found in the catalogues ./data/ZB, ./data/MEF and ./data/Panc
 
 You can download the preprocessed data [here](https://drive.google.com/drive/folders/1WdB9G0c_b0R6Whk_U4iJVTq2KejfYQJS?usp=share_link)
 
