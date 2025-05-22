@@ -16,17 +16,14 @@ import itertools
 
 
 
-def run(args,leaveouts=None, holdout=None):
+def run(args,leaveouts=None):
 
     args = init_all(args)
 
     if leaveouts is not None:
         args.task = 'leaveout'
         args.leaveouts=leaveouts
-    if holdout is not None:
-        args.task = 'holdout'
-        args.holdout=holdout
-    if (leaveouts is None) and (holdout is None):
+    else:
         args.task = 'fate'
 
     config = init_config(args)  
