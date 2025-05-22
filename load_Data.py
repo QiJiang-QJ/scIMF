@@ -11,10 +11,6 @@ def load_data_ZB(args):
         leaveout_type = 'three_interpolation'
     elif args.leaveouts == [10,11]:
         leaveout_type = 'two_forecasting'
-    elif args.leaveouts == [9,10,11]:
-        leaveout_type = 'three_forecasting'
-    elif args.leaveouts == [2,4,6,9,10,11]:
-        leaveout_type = 'hard'
     elif args.leaveouts == [2,4,6,8,10,11]:
         leaveout_type = 'remove_recovery'
     elif args.leaveouts == []:
@@ -34,7 +30,7 @@ def load_data_ZB(args):
 
 
 
-def load_data_WOT(args):
+def load_data_MEF(args):
     if args.leaveouts == [5,10,15]:
         leaveout_type = 'three_interpolation'
     elif args.leaveouts == [16,17,18]:
@@ -58,6 +54,36 @@ def load_data_WOT(args):
     cell_types =  None
     return data.to_numpy(), cell_tp, cell_types
 
+def load_data_Panc(args):
+    if args.leaveouts == []:
+        leaveout_type = 'all_times'
+    elif args.leaveouts == [1]:
+        leaveout_type = 'leaveout1'
+    elif args.leaveouts == [2]:
+        leaveout_type = 'leaveout2'
+    elif args.leaveouts == [3]:
+        leaveout_type = 'leaveout3'
+    elif args.leaveouts == [4]:
+        leaveout_type = 'leaveout4'
+    elif args.leaveouts == [5]:
+        leaveout_type = 'leaveout5'
+    elif args.leaveouts == [6]:
+        leaveout_type = 'leaveout6'
+    elif args.leaveouts == [7]:
+        leaveout_type = 'leaveout7'
+    args.split_type = leaveout_type
+    data = pd.read_csv("{}/new_processed/{}-{}_data.csv".format(args.data_dir,leaveout_type, args.latent_type), header=0, index_col=0)
+    meta_data = pd.read_csv("{}/new_processed/meta_data.csv".format(args.data_dir),header=0, index_col=0)
+    meta_data = meta_data.loc[data.index,:]
+    cell_stage = meta_data["CellWeek"]
+    unique_cell_stages = natsort.natsorted(np.unique(cell_stage))
+    cell_tp = np.zeros((len(cell_stage), ))
+    cell_tp[cell_tp == 0] = np.nan
+    for idx, s in enumerate(unique_cell_stages):
+        cell_tp[np.where(cell_stage == s)[0]] = idx
+    cell_types =  meta_data['Assigned_cluster'].values
+    return data.to_numpy(), cell_tp, cell_types
+
 
 
 
@@ -69,18 +95,24 @@ def load_data(args):
 
     args.data_dir = "{}/{}".format(args.data_dir,args.dataset)
 
-    if args.dataset == 'zebrafish':
+    if args.dataset == 'ZB':
         n_tps = 12
         args.Train_ts = list(range(1, n_tps)) # 1-11
         args.train_t = list(sorted(set(args.Train_ts)-set(args.leaveouts)))   
         args.test_t = args.leaveouts
         data, cell_tps, cell_types = load_data_ZB(args)    
-    elif args.dataset == 'wot':
+    elif args.dataset == 'MEF':
         n_tps = 19
         args.Train_ts = list(range(1, n_tps)) # 1-18
         args.train_t = list(sorted(set(args.Train_ts)-set(args.leaveouts))) 
         args.test_t = args.leaveouts
-        data, cell_tps, cell_types = load_data_WOT(args)  
+        data, cell_tps, cell_types = load_data_MEF(args)  
+    elif args.dataset == 'Panc':
+        n_tps = 8
+        args.Train_ts = list(range(1, n_tps)) # 1-7
+        args.train_t = list(sorted(set(args.Train_ts)-set(args.leaveouts))) 
+        args.test_t = args.leaveouts
+        data, cell_tps, cell_types = load_data_Panc(args)
 
     args.out_dir = "{}/{}/{}/seed_{}/Ours".format(args.out_dir, args.dataset, args.split_type, args.seed)
 
