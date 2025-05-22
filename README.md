@@ -1,7 +1,7 @@
 # Learning collective multi-cellular dynamics from temporal scRNA-seq via a transformer-enhanced Neural SDE
 
 **Authour**: Qi Jiang, Lei Zhang, Longquan Li and Lin Wan
-![Overview](./assets/Overview.jpg)
+![Overview](./asserts/Overview.jpg)
 
 Time-series single-cell RNA-sequencing (scRNA-seq) datasets offer unprecedented insights into the dynamics and heterogeneity of cellular systems. These systems exhibit multiscale collective behaviors driven by intricate intracellular gene regulatory networks and intercellular interactions of molecules. However, inferring interacting cell population dynamics from time-series scRNA-seq data remains a significant challenge, as cells are isolated and destroyed during sequencing. To address this, we introduce scIMF, a single-cell deep generative Interacting Mean Field model, designed to learn collective multi-cellular dynamics. Our approach leverages a transformer-enhanced stochastic differential equation network to simultaneously capture cell-intrinsic dynamics and intercellular interactions. Through extensive benchmarking on multiple scRNA-seq datasets, scIMF outperforms existing methods in reconstructing gene expression at held-out time points, demonstrating that modeling cell-cell communication enhances the accuracy of multicellular dynamics characterization. Additionally, our model provides biologically interpretable insights into cell-cell interactions during dynamic processes, offering a powerful tool for understanding complex cellular systems.
 
