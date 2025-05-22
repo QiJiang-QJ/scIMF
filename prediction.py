@@ -4,15 +4,12 @@ import pandas as pd
 import os
 import glob
 
-from Dev.utils import init_all
-from Dev.load_Data import load_data
-from Dev.model import MultiCNet
+from utils import init_all
+from load_Data import load_data
+from model import MultiCNet
 
 
-## 已经导入train的config信息
 def derive_model(args, ckpt_name='best'):
-
-    print(args.train_pt)
 
     args = init_all(args)
     args.for_train = False
@@ -21,16 +18,13 @@ def derive_model(args, ckpt_name='best'):
     data_listAllT, cell_types_listAllT, config = load_data(args)
     model = MultiCNet(config)
 
-    print(config.train_pt)
-
     if ckpt_name == 'final':
         epoch_ = str(config.train_epochs).rjust(6, '0')
         ckpt_name = 'epoch_{}'.format(epoch_)
     elif ckpt_name == 'best':
         ckpt_name = 'best'
     train_pt = "./" + config.train_pt.format(ckpt_name)
-    print(config.train_pt)
-    print(train_pt)
+
     checkpoint = torch.load(train_pt, weights_only=True)
     model.load_state_dict(checkpoint['model_state_dict'])
 
@@ -57,6 +51,19 @@ def predict(args, ts, n_cells=None, ckpt_name='best'):
     ]
  
     return latent_listAllT, latent_xs_predict
+
+
+def predict_Endes(args, ckpt_name='best'):
+
+    model, latent_listAllT, cell_types_listAllT, config = derive_model(args, ckpt_name=ckpt_name)
+
+    Endes_latent_allT = []
+    for ii, latent_xt in enumerate(latent_listAllT):
+        latent_xt = latent_xt.to(config.device)
+        latent_xt_endes = latent_xt + model.drift(None,latent_xt)
+        Endes_latent_allT.append(latent_xt_endes.detach().cpu().numpy())
+        
+    return latent_listAllT, Endes_latent_allT
 
 
 
