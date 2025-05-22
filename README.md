@@ -17,19 +17,19 @@ For the dataset of pancreatic β-cell differentiation (Panc data), we downloaded
 
 Detailed pre-processing steps for these datasets can be found in the catalogues ./data/ZB, ./data/MEF and ./data/Panc
 
-You can download the preprocessed data [here](https://drive.google.com/drive/folders/1WdB9G0c_b0R6Whk_U4iJVTq2KejfYQJS?usp=share_link)
+You can download the preprocessed data [here](https://drive.google.com/drive/folders/17Zcy9oGMXJaE8Qu75tyzHYkJpuzMJYSL)
 
 # Getting Started
-PI-SDE takes the input of time-series scRNA-seq data and outputs:
+scIMF takes the input of time-series scRNA-seq data and outputs:
 - predicted gene expressions at unseen time points,
-- the reconstructed potential energy landscape that resembles the original Waddington landscape,
-- inferred cellular velocity.
+- inferred cellular velocity,
+- cell-wise attention scores quantifying cell-cell interaction strengths during collective dynamics
 
 ## Requirements and Setup
 
 ```bash
-conda create -n pi-sde python=3.7.16
-conda activate pi-sde 
+conda create -n pi-sde python=3.8.19
+conda activate scIMF
 pip install -r requirements.txt
 ```
 
