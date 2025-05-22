@@ -150,20 +150,14 @@ def constructOutDir(args):
 
 
 def return_SplitTypes(data_name):
-    if data_name == 'zebrafish':
+    if data_name == 'ZB':
         split_types = ["two_forecasting", "three_interpolation", "remove_recovery"]
         test_tpsS = [[10,11], [4,6,8], [2,4,6,8,10,11]]
-    elif data_name == 'drosophila':
-        split_types = ["three_forecasting", "three_interpolation", "remove_recovery"]
-        test_tpsS = [[8,9,10], [4,6,8], [2,4,6,8,9,10]]
-    elif data_name == 'wot':
+    elif data_name == 'MEF':
         split_types = ["three_forecasting", "three_interpolation", "remove_recovery"]
         test_tpsS = [[16,17,18], [5,10,15], [5,7,9,11,15,16,17,18]]
-    elif data_name == 'Veres':
-        split_types = ["two_forecasting", "two_interpolation"]
-        test_tpsS = [[6,7], [3,5]]
-    elif data_name == 'DIISCO_CARB':
-        split_types = ["forecasting", "interpolation", "remove_recovery"]
-        test_tpsS = [[4], [2], [2,4]]
+    elif data_name == 'Panc':
+        split_types = ["leaveout1", "leaveout2","leaveout3", "leaveout4","leaveout5", "leaveout6","leaveout7"]
+        test_tpsS = [[1], [2],[3], [4],[5], [6],[7]]
 
     return split_types, test_tpsS
