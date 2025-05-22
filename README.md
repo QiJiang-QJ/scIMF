@@ -33,15 +33,3 @@ conda activate scIMF
 pip install -r requirements.txt
 ```
 
-
-## Fate task on Veres data (train on all time points)
-
-```bash
-python run_fate.py
-```
-
-## Held-out task on Veres data
-
-```bash
-python run_leaveout.py
-```
