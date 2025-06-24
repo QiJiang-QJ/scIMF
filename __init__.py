@@ -1,7 +1,7 @@
 # from Dev import model, train, utils, config
 from Dev.train import run
 from Dev.evaluation import  evaluate
-from Dev.prediction import predict, predict_Endes, predict_TrajectoryPoints
+from Dev.prediction import predict, predict_Endes
 from Dev.utils import init_all
 
 
@@ -33,10 +33,6 @@ def derive_PredictionForTest(args, ts, n_cells=2000, ckpt_name='final'):
 def derive_VectorEndes(args, ckpt_name='final', onlyUseDrift = True):
     data_listAllT, latent_listAllT, Endes_latent_allT = predict_Endes(args, ckpt_name=ckpt_name, onlyUseDrift = onlyUseDrift)
     return data_listAllT, latent_listAllT, Endes_latent_allT
-
-def derive_trajectoryPoints(args, n_cells=2000, ckpt_name='final', dt = 0.1):
-    data_listAllT, latent_xs_predict, recon_xs_predict, times = predict_TrajectoryPoints(args, n_cells=n_cells, ckpt_name=ckpt_name, dt = dt)
-    return data_listAllT, latent_xs_predict, recon_xs_predict, times
 
 
 
